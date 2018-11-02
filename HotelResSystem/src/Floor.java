@@ -24,7 +24,7 @@ public class Floor {
             rooms[counter].display();
     }
 
-    public void findaRoomtoBook()
+    public void findARoomToBook()
     {
         Scanner kboard = new Scanner(System.in);
         int nos; int counter=0; boolean found = false;
@@ -39,7 +39,7 @@ public class Floor {
                 break;
             }
         }
-        if (found == false) System.out.println("No such Room number");
+        if (!found) System.out.println("No such Room number");
     }
 
     public void findaRoomtoCancel()
@@ -57,7 +57,7 @@ public class Floor {
                 break;
             }
         }
-        if (found == false) System.out.println("No such Room number");
+        if (!found) System.out.println("No such Room number");
     }
 
 

@@ -1,9 +1,11 @@
+import com.sun.org.apache.bcel.internal.generic.SWITCH;
+
 import java.util.Scanner;
 
 public class Room {
 
     private int roomNos;
-    private Customer occupier;
+    private CustomerSuper occupier;
     private boolean status;
 
     public Room(int rnos)
@@ -15,18 +17,18 @@ public class Room {
     public void display()
     {
         System.out.println("Room number: "+roomNos);
-        if (status==true)
+        if (status)
             System.out.println("Room is free");
         else
             occupier.display();
     }
 
-    public void bookroom(Customer newperson)
+    public void bookroom(CustomerSuper newPerson)
     {
-        if (status==true)
+        if (status)
         {
             status = false;
-            occupier = newperson;
+            occupier = newPerson;
         }
         else
             System.out.println("Sorry room booked");
@@ -35,16 +37,42 @@ public class Room {
     public void bookroom()
     {
         System.out.println("Room "+roomNos);
-        if (status==true)
+        if (status)
         {
-            Customer newperson = new Customer();
-            newperson.getname();
-            newperson.getemail();
+            String customerType = initialiseCustomer();
+            boolean valid = false;
+
+            while (!valid) {
+
+                boolean ordCustomer = customerType.equalsIgnoreCase("ordinary");
+                boolean goldCustomer = customerType.equalsIgnoreCase("gold");
+
+                if (ordCustomer) {
+                    valid = true;
+                    CustomerSuper newPerson = new OrdinaryCustomer();
+                    occupier = newPerson;
+                } else if (goldCustomer) {
+                    valid = true;
+                    CustomerSuper newPerson = new GoldCustomer();
+                    occupier = newPerson;
+                }else{
+                    customerType = initialiseCustomer();
+                }
+            }
+
             status = false;
-            occupier = newperson;
+
         }
         else
             System.out.println("Sorry room booked");
+    }
+
+    public String initialiseCustomer() {
+        Scanner customerScanner = new Scanner(System.in);
+
+        System.out.println("Enter Customer type (Ordinary/Gold): ");
+        return customerScanner.next();
+
     }
 
     public void cancelRoom()

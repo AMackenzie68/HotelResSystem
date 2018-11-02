@@ -42,7 +42,7 @@ public class Hotel {
         int floorchoice;
         System.out.println("Which floor would you like to stay on?");
         floorchoice = kboard.nextInt();
-        floors[floorchoice-1].findaRoomtoBook();
+        floors[floorchoice-1].findARoomToBook();
     }
 
     public void CancelARoom(){
